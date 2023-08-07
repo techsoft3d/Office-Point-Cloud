@@ -1,6 +1,6 @@
 # Hoops Web Platform - Office Point Cloud Demo
 
-See this demo running live on [GitHub Pages](https://techsoft3d.github.io/2D-DWG-Drawing-Viewer/index.html?instance=HotelFloorplan).
+See this demo running live on [GitHub Pages](https://techsoft3d.github.io/Office-Point-Cloud/).
 
 ## In order to run locally
 
