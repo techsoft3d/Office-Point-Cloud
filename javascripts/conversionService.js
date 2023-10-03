@@ -1,25 +1,15 @@
 
-var modelUIDs = ["e99ae692-cda2-4c00-8b29-2b0461b47483", //DotProductOffice
-"bf5326d7-1d98-4917-b3b1-8f6160c3cca6" //DotProductOfficeScan
+var modelUIDs = ["22a61f34-705d-4345-bdd8-661061ab5ea2", //DotProductOffice
+"83792004-f4a6-46d5-a87d-d86091782c75" //DotProductOfficeScan
 ]
 async function startViewer(modelName) {
-        const conversionServiceURI = "https://csapi.techsoft3d.com";
-
         var viewer;
-
-        let res = await fetch(conversionServiceURI + '/api/streamingSession');
-        var data = await res.json();
-        var endpointUriBeginning = 'ws://';
-
-        if(conversionServiceURI.substring(0, 5).includes("https")){
-                endpointUriBeginning = 'wss://'
-        }
-
-        await fetch(conversionServiceURI + '/api/enableStreamAccess/' + data.sessionid, { method: 'put', headers: { 'items': JSON.stringify(modelUIDs) } });
-
+        let sessioninfo = await caasClient.getStreamingSession();
+        await caasClient.enableStreamAccess(sessioninfo.sessionid, modelUIDs);
+        
         viewer = new Communicator.WebViewer({
                 containerId: "viewerContainer",
-                endpointUri: endpointUriBeginning + data.serverurl + ":" + data.port + '?token=' + data.sessionid,
+                endpointUri:sessioninfo.endpointUri,
                 model: modelName,
                 boundingPreviewMode: "none",
                 enginePath: "https://cdn.jsdelivr.net/gh/techsoft3d/hoops-web-viewer",
@@ -33,14 +23,9 @@ async function startViewer(modelName) {
 }
 
 async function fetchVersionNumber() {
-        const conversionServiceURI = "https://csapi.techsoft3d.com";
-
-        let res = await fetch(conversionServiceURI + '/api/hcVersion');
-        var data = await res.json();
-        versionNumer = data;
-        
-        return data
-
+  let data = await caasClient.getHCVersion();
+  versionNumer = data;        
+  return data
 }
 
 
