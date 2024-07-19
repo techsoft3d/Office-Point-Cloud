@@ -12,7 +12,7 @@ async function startViewer(modelName) {
                 endpointUri:sessioninfo.endpointUri,
                 model: modelName,
                 boundingPreviewMode: "none",
-                enginePath: "https://cdn.jsdelivr.net/gh/techsoft3d/hoops-web-viewer",
+                enginePath: `https://cdn.jsdelivr.net/gh/techsoft3d/hoops-web-viewer@20${versionNumer}`,
                 rendererType: 0
         });
 
